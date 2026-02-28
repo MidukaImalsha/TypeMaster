@@ -27,13 +27,13 @@ const Leaderboard: React.FC = () => {
   const getPositionIcon = (position: number) => {
     switch (position) {
       case 0:
-        return <Trophy className="h-8 w-8 text-blue-500" />;
+        return <Trophy className="h-8 w-8 text-yellow-400" />;
       case 1:
-        return <Medal className="h-8 w-8 text-blue-400" />;
+        return <Medal className="h-8 w-8 text-gray-400" />;
       case 2:
-        return <Award className="h-8 w-8 text-blue-300" />;
+        return <Award className="h-8 w-8 text-orange-400" />;
       default:
-        return <Rocket className="h-8 w-8 text-blue-200" />;
+        return <Rocket className="h-8 w-8 text-blue-300" />;
     }
   };
 
