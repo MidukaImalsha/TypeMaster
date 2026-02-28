@@ -16,28 +16,24 @@ import { useLoader } from "../utils/LoaderContext";
 import qr from "../assets/qr.jpg";
 
 const Leaderboard: React.FC = () => {
-  const { players, averageWPM, loading,totalPlayers, error } = useLeaderboard();
+  const { players, averageWPM, loading, totalPlayers, error } = useLeaderboard();
   const { showLoader, hideLoader } = useLoader();
 
   useEffect(() => {
-    if (loading) {
-      showLoader();
-    } else {
-      hideLoader();
-    }
+    if (loading) showLoader();
+    else hideLoader();
   }, [loading, showLoader, hideLoader]);
-
 
   const getPositionIcon = (position: number) => {
     switch (position) {
       case 0:
-        return <Trophy className="h-8 w-8 text-yellow-400" />;
+        return <Trophy className="h-8 w-8 text-blue-500" />;
       case 1:
-        return <Medal className="h-8 w-8 text-gray-400" />;
+        return <Medal className="h-8 w-8 text-blue-400" />;
       case 2:
-        return <Award className="h-8 w-8 text-amber-600" />;
+        return <Award className="h-8 w-8 text-blue-300" />;
       default:
-        return <Rocket className="h-8 w-8 text-blue-400" />;
+        return <Rocket className="h-8 w-8 text-blue-200" />;
     }
   };
 
@@ -46,12 +42,14 @@ const Leaderboard: React.FC = () => {
   return (
     <div className="mx-auto max-w-6xl">
       <div className="flex gap-6">
-        <div className="flex-1 overflow-hidden rounded-2xl bg-white shadow-xl">
-          <div className="space-y-2 border-b border-gray-200 p-6 text-center">
-            <h1 className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
+        {/* Leaderboard */}
+        <div className="flex-1 overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 shadow-2xl">
+          <div className="space-y-2 border-b border-blue-200 p-6 text-center">
+            {/* Dark Gradient Heading */}
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 bg-clip-text text-transparent">
               TypeMaster Leaderboard
             </h1>
-            <p className="text-gray-600">Top performers in Extru 2026</p>
+            <p className="text-black">Top performers in Extru 2026</p>
           </div>
           <div className="p-6">
             <AnimatePresence>
@@ -63,8 +61,8 @@ const Leaderboard: React.FC = () => {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   className={`flex items-center gap-4 p-4 ${
-                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                  } group relative mb-2 overflow-hidden rounded-xl transition-shadow hover:shadow-md`}
+                    index % 2 === 0 ? "bg-blue-50" : "bg-blue-100"
+                  } group relative mb-2 overflow-hidden rounded-xl transition-shadow hover:shadow-lg`}
                 >
                   {/* Position Indicator */}
                   <div className="flex w-12 items-center justify-center">
@@ -76,13 +74,11 @@ const Leaderboard: React.FC = () => {
                     <img
                       src={player.avatar || "/placeholder.svg"}
                       alt={player.name}
-                      className="h-12 w-12 rounded-full border-2 border-purple-200"
+                      className="h-12 w-12 rounded-full border-2 border-blue-300"
                     />
                     <div>
-                      <h3 className="font-semibold text-gray-800">
-                        {player.name}
-                      </h3>
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-600">
+                      <h3 className="font-semibold text-black">{player.name}</h3>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-black/70">
                         {player.university && (
                           <div className="flex items-center gap-1">
                             <GraduationCap className="h-4 w-4" />
@@ -111,10 +107,8 @@ const Leaderboard: React.FC = () => {
                         damping: 30,
                       }}
                     >
-                      <div className="text-2xl font-bold text-purple-600">
-                        {player.wpm}
-                      </div>
-                      <div className="text-xs text-gray-500">WPM</div>
+                      <div className="text-2xl font-bold text-blue-600">{player.wpm}</div>
+                      <div className="text-xs text-black/60">WPM</div>
                     </motion.div>
                     <motion.div
                       className="text-center"
@@ -129,13 +123,13 @@ const Leaderboard: React.FC = () => {
                       <div className="min-w-[110px] text-2xl font-bold text-green-600">
                         {player.accuracy}%
                       </div>
-                      <div className="text-xs text-gray-500">Accuracy</div>
+                      <div className="text-xs text-black/60">Accuracy</div>
                     </motion.div>
                   </div>
 
                   {/* Progress bar */}
                   <motion.div
-                    className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-600 to-pink-600"
+                    className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-blue-300"
                     initial={{ width: 0 }}
                     animate={{ width: `${player.accuracy}%` }}
                     transition={{ duration: 1, ease: "easeOut" }}
@@ -146,36 +140,31 @@ const Leaderboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Average WPM Card */}
+        {/* Stats Cards */}
         <div className="flex flex-col gap-3">
-          <div className="w-64 self-start rounded-2xl bg-white p-6 shadow-xl">
+          <div className="w-64 self-start rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 p-6 shadow-2xl">
             <div className="mb-4 flex items-center justify-center">
-              <TrendingUp className="h-12 w-12 text-purple-600" />
+              <TrendingUp className="h-12 w-12 text-blue-600" />
             </div>
-            <h2 className="mb-2 text-center text-2xl font-bold text-gray-800">
-              Average WPM
-            </h2>
+            <h2 className="mb-2 text-center text-2xl font-bold text-black">Average WPM</h2>
             <motion.div
-              className="text-center text-4xl font-bold text-purple-600"
+              className="text-center text-4xl font-bold text-blue-600"
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             >
               {averageWPM}
             </motion.div>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Across all participants
-            </p>
+            <p className="mt-2 text-center text-sm text-black/70">Across all participants</p>
           </div>
-          <div className="w-64 self-start rounded-2xl bg-white p-6 shadow-xl">
+
+          <div className="w-64 self-start rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 p-6 shadow-2xl">
             <div className="mb-4 flex items-center justify-center">
-              <PersonStanding className="h-12 w-12 text-purple-600" />
+              <PersonStanding className="h-12 w-12 text-blue-600" />
             </div>
-            <h2 className="mb-2 text-center text-2xl font-bold text-gray-800">
-              Total Extru Participants
-            </h2>
+            <h2 className="mb-2 text-center text-2xl font-bold text-black">Total Extru Participants</h2>
             <motion.div
-              className="text-center text-4xl font-bold text-purple-600"
+              className="text-center text-4xl font-bold text-blue-600"
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -184,17 +173,15 @@ const Leaderboard: React.FC = () => {
             </motion.div>
           </div>
 
-          <div className="w-64 self-start rounded-2xl bg-white p-6 shadow-xl">
-            <h2 className="mb-2 text-center text-2xl font-bold text-gray-800">
-              Visit Us
-            </h2>
+          <div className="w-64 self-start rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 p-6 shadow-2xl">
+            <h2 className="mb-2 text-center text-2xl font-bold text-black">Visit Us</h2>
             <motion.div
-              className="text-center text-4xl font-bold text-purple-600"
+              className="text-center text-4xl font-bold text-blue-600"
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             >
-              <img src={qr} alt="" />
+              <img src={qr} alt="QR Code" />
             </motion.div>
           </div>
         </div>
