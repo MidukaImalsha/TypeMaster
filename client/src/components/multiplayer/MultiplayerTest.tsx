@@ -4,7 +4,7 @@ import { Socket } from "socket.io-client";
 import { useMultiplayerResult } from "../../helpers/useMultiplayerResult";
 import MultiPlayerEndScreen from "./MultiPlayerEndScreen";
 import LiveProgress from "./LiveProgress";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Timer } from "lucide-react";
 import { useLoader } from "../../utils/LoaderContext";
 import { useParagraph } from "../../helpers/useParagraph";
 import { gameTime } from "../../controllers/gameSettings";
@@ -285,7 +285,8 @@ const MultiplayerTest: React.FC<MultiplayerLogicProps> = ({
 
                     <div className="test fadein relative rounded-xl pb-12 font-mono">
                         {/* Timer */}
-                        <div className="timer fadein absolute left-8 top-5 text-3xl">
+                        <div className="timer fadein absolute left-8 top-5 flex items-center gap-2 text-3xl">
+                            <Timer className="h-7 w-7" />
                             {timer}
                         </div>
 
@@ -300,7 +301,7 @@ const MultiplayerTest: React.FC<MultiplayerLogicProps> = ({
                         {/* Typing area */}
                         <div
                             ref={focusRef}
-                            className="paragraph mx-auto flex h-[350px] w-full flex-wrap overflow-clip px-8 pb-8 pt-16 text-3xl leading-relaxed tracking-wide text-letter-unchecked outline-none hover:cursor-default"
+                            className="paragraph mx-auto flex h-[350px] w-full flex-wrap overflow-clip px-8 pb-8 pt-16 text-3xl leading-relaxed tracking-wide text-white/80 outline-none hover:cursor-default"
                             tabIndex={0}
                             onKeyDown={handleInput}
                         >

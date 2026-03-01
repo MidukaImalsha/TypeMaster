@@ -3,7 +3,7 @@ import { useParagraph } from "../../helpers/useParagraph";
 import BlinkingCursor from "../../utils/BlinkingCursor";
 import Results from "./Results";
 import { useLoader } from "../../utils/LoaderContext";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Timer } from "lucide-react";
 
 const SinglePlayerGame = () => {
     const { paragraph, isLoading } = useParagraph();
@@ -198,7 +198,10 @@ const SinglePlayerGame = () => {
                         <>
                             <div className="test fadein relative rounded-xl pb-12 font-mono">
                                 {/* Timer */}
-                                <div className="absolute top-5 left-8 timer fadein text-3xl">{timer}</div>
+                                <div className="absolute top-5 left-8 timer fadein flex items-center gap-2 text-3xl">
+                                    <Timer className="h-7 w-7" />
+                                    {timer}
+                                </div>
 
                                 {/* Caps Lock Warning */}
                                 {isCapsLockOn && (
@@ -211,7 +214,7 @@ const SinglePlayerGame = () => {
                                 {/* Typing area */}
                                 <div
                                     ref={focusRef}
-                                    className="paragraph mx-auto flex h-[350px] w-full flex-wrap overflow-clip px-8 pt-16 pb-8 text-4xl leading-relaxed tracking-wide text-letter-unchecked outline-none hover:cursor-default"
+                                    className="paragraph mx-auto flex h-[350px] w-full flex-wrap overflow-clip px-8 pt-16 pb-8 text-4xl leading-relaxed tracking-wide text-white/80 outline-none hover:cursor-default"
                                     tabIndex={0}
                                     onKeyDown={handleInput}
                                 >
