@@ -267,7 +267,9 @@ const MultiplayerTest: React.FC<MultiplayerLogicProps> = ({
         <>
             {timer === 0 ? (
                 <>
-                    <div className="timer">Game Over</div>
+                    <div className="timer mb-4 text-center text-4xl font-black tracking-widest uppercase bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                        Game Over
+                    </div>
                     <MultiPlayerEndScreen
                         gameId={gameId}
                         results={finalResults}
@@ -281,26 +283,30 @@ const MultiplayerTest: React.FC<MultiplayerLogicProps> = ({
                         currentPlayer={currentPlayer}
                     />
 
-                    <div className="test test fadein relative rounded-lg pb-12 font-mono shadow-lg transition-all ease-in">
-                        <div className="timer fadein absolute left-8 top-5 text-3xl text-letter-unchecked">
+                    <div className="test fadein relative rounded-xl pb-12 font-mono">
+                        {/* Timer */}
+                        <div className="timer fadein absolute left-8 top-5 text-3xl">
                             {timer}
                         </div>
+
+                        {/* Caps Lock Warning */}
                         {isCapsLockOn && (
-                            <div className="fadein absolute right-[45%] top-5 flex items-center bg-yellow-400 p-2 text-xl">
-                                <AlertCircle className="mr-2" color="black" />
-                                <span className="text-black">
-                                    Caps Lock is ON
-                                </span>
+                            <div className="fadein absolute right-[45%] top-4 flex items-center gap-2 rounded-lg border border-yellow-500/50 bg-yellow-500/20 px-3 py-2 text-sm font-semibold text-yellow-300 backdrop-blur-sm">
+                                <AlertCircle className="h-4 w-4 text-yellow-400" />
+                                Caps Lock is ON
                             </div>
                         )}
+
+                        {/* Typing area */}
                         <div
                             ref={focusRef}
-                            className="paragraph mx-auto flex h-[350px] w-full flex-wrap overflow-clip px-8 pb-8 pt-16 text-3xl leading-relaxed tracking-wide text-[#0061fe] outline-none hover:cursor-default"
+                            className="paragraph mx-auto flex h-[350px] w-full flex-wrap overflow-clip px-8 pb-8 pt-16 text-3xl leading-relaxed tracking-wide text-letter-unchecked outline-none hover:cursor-default"
                             tabIndex={0}
                             onKeyDown={handleInput}
                         >
                             {renderParagraph}
                         </div>
+
                         <BlinkingCursor
                             wordIndex={currentWordIndex}
                             letterIndex={currentLetterIndex}

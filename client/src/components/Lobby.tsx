@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PopupForm from "./multiplayer/PopupForm";
 import GlowingLogo from "../utils/GlowingLogo";
 import typeMasterLogo from "../assets/logos/TypeMasterLogo.webp";
+import { Plus, LogIn, AlertTriangle } from "lucide-react";
 
 export interface LobbyProps {
   createGame: (
@@ -90,7 +91,7 @@ const Lobby: React.FC<LobbyProps> = ({ createGame, joinGame }) => {
     <>
       {isOverlayVisible && (
         <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-50"
+          className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 backdrop-blur-sm"
           onClick={handleOutsideClick}
         >
           <PopupForm
@@ -100,44 +101,61 @@ const Lobby: React.FC<LobbyProps> = ({ createGame, joinGame }) => {
           />
         </div>
       )}
-      <div className="flex h-60 w-full mb-3 items-center justify-center">
+
+      <div className="fadein flex flex-col items-center">
+        {/* Logo */}
+        <div className="flex h-48 w-full items-center justify-center mb-4">
           <GlowingLogo src={typeMasterLogo} alt="logo" />
-        </div>  
-      <div className="m-auto grid w-1/2 grid-cols-2 gap-2">
-        <h2 className="col-span-full text-center text-2xl font-bold">
+        </div>
+
+        {/* Title */}
+        <h2 className="mb-8 text-center text-3xl font-black tracking-tight bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
           EXTRU Type Master 2026
         </h2>
-        <div className="h-full w-full rounded-lg bg-white p-6 shadow-xl">
-          <button
-            onClick={showCreateGamePopup}
-            className="m-auto block h-[87px] rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
-          >
-            Create New Game
-          </button>
-        </div>
-        <div className="flex flex-col gap-y-2 rounded-lg bg-white p-6 shadow-md">
-          <div className="m-auto">
+
+        {/* Cards */}
+        <div className="grid w-full max-w-xl grid-cols-2 gap-4">
+          {/* Create Game */}
+          <div className="glass-card flex flex-col items-center justify-center gap-4 p-8">
+            <div className="rounded-full bg-blue-500/20 p-4 border border-blue-400/30">
+              <Plus className="h-8 w-8 text-blue-400" />
+            </div>
+            <span className="text-sm font-semibold text-blue-200/70 uppercase tracking-widest">Create Room</span>
+            <button
+              onClick={showCreateGamePopup}
+              className="btn-primary w-full"
+            >
+              Create New Game
+            </button>
+          </div>
+
+          {/* Join Game */}
+          <div className="glass-card flex flex-col items-center justify-center gap-4 p-8">
+            <div className="rounded-full bg-cyan-500/20 p-4 border border-cyan-400/30">
+              <LogIn className="h-8 w-8 text-cyan-400" />
+            </div>
+            <span className="text-sm font-semibold text-blue-200/70 uppercase tracking-widest">Join Room</span>
             <input
               type="text"
-              placeholder="Enter game ID"
+              placeholder="Enter Game ID"
               value={gameId}
               onChange={(e) => setGameId(e.target.value)}
-              className="w-40 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              className="w-full rounded-lg border border-blue-700/50 bg-blue-950/60 px-3 py-2 text-sm text-blue-100 placeholder:text-blue-400/40 focus:border-blue-400/70 focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all"
             />
+            <button
+              onClick={showJoinGamePopup}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-[0.625rem] border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-sm font-bold text-cyan-300 transition-all duration-200 hover:bg-cyan-500/20 hover:border-cyan-400/60 hover:shadow-[0_0_16px_rgba(34,211,238,0.15)]"
+            >
+              <LogIn className="h-4 w-4" />
+              Join Game
+            </button>
+            {warning && (
+              <div className={`flex items-center gap-2 text-sm text-red-400 ${vibrating ? "vibrate" : ""}`}>
+                <AlertTriangle className="h-4 w-4 flex-shrink-0" />
+                <span>Please enter a Game ID</span>
+              </div>
+            )}
           </div>
-          <button
-            onClick={showJoinGamePopup}
-            className="m-auto w-40 rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-600"
-          >
-            Join Game
-          </button>
-          {warning && (
-            <div className="mb-4 flex justify-center">
-              <h3 className={`text-red-500 ${vibrating ? "vibrate" : ""}`}>
-                Please Enter a Game ID to Continue
-              </h3>
-            </div>
-          )}
         </div>
       </div>
     </>

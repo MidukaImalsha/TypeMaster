@@ -1,85 +1,119 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap");
 
-body{
-    font-family: "Roboto Mono", monospace;
-    background-color: #0000001b;
-}
-
+/* ── Paragraph / Typing area ── */
 .paragraph {
     font-family: "Roboto Mono", monospace;
 }
 
 .paragraph .word {
-    margin-right: 0.8rem;
+    margin-right: 0.75rem;
 }
 
 .paragraph .word span {
-    transition: color 0.3s ease;
+    transition: color 0.15s ease;
 }
 
-.paragraph .word span.text-green-500 {
-    color: #0cfa7b;
+.paragraph .word span.text-letter-correct {
+    color: #60d48a;
 }
 
-.paragraph .word span.text-red-500 {
-    color: #e95678;
+.paragraph .word span.text-letter-incorrect {
+    color: #f87171;
 }
 
-/* HTML: <div class="loader"></div> */
-/* HTML: <div class="loader"></div> */
+/* ── Typing test container ── */
+.test {
+    background: linear-gradient(135deg, rgba(10, 25, 60, 0.85) 0%, rgba(5, 15, 40, 0.95) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 1rem;
+    box-shadow:
+        0 0 40px rgba(59, 130, 246, 0.08),
+        0 8px 32px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+}
+
+/* ── Timer ── */
+.timer {
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+    color: hsl(217, 91%, 60%);
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+}
+
+/* ── Loader bar ── */
 .loader {
-    margin: auto;
+    margin: 2rem auto;
     width: 60%;
-    height: 50px;
-    background: repeating-linear-gradient(-45deg, #000 0 15px, #0000 0 20px)
-        left/200% 100%;
-    animation: l3 15s infinite linear;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+    background-size: 200% 100%;
+    border-radius: 9999px;
+    animation: loaderSlide 1.5s infinite linear;
 }
-@keyframes l3 {
+
+@keyframes loaderSlide {
+    0% {
+        background-position: 200% center;
+    }
+
     100% {
-        background-position: right;
+        background-position: -200% center;
     }
 }
 
+/* ── Fade-in animation ── */
 .fadein {
-    animation: fadeIn 0.5s ease-in;
+    animation: fadeIn 0.4s ease-out;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
+        transform: translateY(6px);
     }
+
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
+/* ── Blink animation ── */
 @keyframes blink {
+
     0%,
     100% {
         opacity: 1;
     }
+
     50% {
         opacity: 0;
     }
 }
 
+/* ── Vibrate animation ── */
 @keyframes vibrate {
     0% {
         transform: translate(0);
     }
+
     20% {
-        transform: translate(-2px, 2px);
+        transform: translate(-3px, 2px);
     }
+
     40% {
-        transform: translate(-2px, -2px);
+        transform: translate(-3px, -2px);
     }
+
     60% {
-        transform: translate(2px, 2px);
+        transform: translate(3px, 2px);
     }
+
     80% {
-        transform: translate(2px, -2px);
+        transform: translate(3px, -2px);
     }
+
     100% {
         transform: translate(0);
     }
@@ -89,27 +123,96 @@ body{
     animation: vibrate 0.3s linear;
 }
 
+/* ── Glassmorphism card ── */
 .glass {
-    /* From https://css.glass */
-background: rgba(0, 170, 255, 0.38);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(13.7px);
--webkit-backdrop-filter: blur(13.7px);
-border: 1px solid rgba(0, 170, 255, 0.4);
+    background: rgba(14, 36, 89, 0.45);
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(59, 130, 246, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
+/* ── Blue glass card variant ── */
+.glass-card {
+    background: linear-gradient(135deg, rgba(15, 40, 100, 0.6) 0%, rgba(8, 20, 60, 0.7) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
 
+.glass-card:hover {
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+/* ── Glowing logo ── */
 .glowing-logo {
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-    animation: glow-animation 2s infinite alternate;
-  }
-  
-  @keyframes glow-animation {
+    filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.75));
+    animation: glow-animation 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes glow-animation {
     from {
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+        filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
     }
+
     to {
-      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+        filter: drop-shadow(0 0 28px rgba(96, 165, 250, 0.9));
     }
-  }
+}
+
+/* ── Blue button ── */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 0.625rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    color: #fff;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border: 1px solid rgba(147, 197, 253, 0.3);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4), 0 0 0 0 rgba(59, 130, 246, 0);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.55), 0 0 0 3px rgba(59, 130, 246, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* ── Racetrack ── */
+.racetrack {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 30, 70, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.4);
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.7);
+}

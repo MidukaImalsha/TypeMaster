@@ -169,7 +169,7 @@ const SinglePlayerGame = () => {
     };
 
     useEffect(() => {
-        
+
         let intervalId: NodeJS.Timeout;
 
         if (isStarted && timer > 0) {
@@ -187,30 +187,37 @@ const SinglePlayerGame = () => {
         <>
             {timer === 0 ? (
                 <>
-                    <div className="timer">Game Over</div>
+                    <div className="timer mb-4 text-center text-4xl font-black tracking-widest uppercase bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                        Game Over
+                    </div>
                     <Results typed={tracking} paragraph={paragraph} />
                 </>
             ) : (
                 <>
                     {!isLoading && (
                         <>
-                            
-                            <div className=" test fadein relative rounded-lg shadow-lg transition-all ease-in pb-12 font-mono" >
-                                <div className=" absolute top-5 left-8 timer fadein text-3xl text-letter-unchecked">{timer}</div>
-                                {isCapsLockOn && (  
-                                    <div className="absolute p-2 text-xl top-5 right-[45%] fadein flex items-center bg-yellow-400">
-                                        <AlertCircle className="mr-2" color="black"/>
-                                        <span className="text-black">Caps Lock is ON</span>
+                            <div className="test fadein relative rounded-xl pb-12 font-mono">
+                                {/* Timer */}
+                                <div className="absolute top-5 left-8 timer fadein text-3xl">{timer}</div>
+
+                                {/* Caps Lock Warning */}
+                                {isCapsLockOn && (
+                                    <div className="absolute top-4 right-[45%] fadein flex items-center gap-2 rounded-lg border border-yellow-500/50 bg-yellow-500/20 px-3 py-2 text-sm font-semibold text-yellow-300 backdrop-blur-sm">
+                                        <AlertCircle className="h-4 w-4 text-yellow-400" />
+                                        Caps Lock is ON
                                     </div>
                                 )}
+
+                                {/* Typing area */}
                                 <div
                                     ref={focusRef}
-                                    className="paragraph mx-auto flex w-full flex-wrap   px-8 pt-16 pb-8  text-4xl leading-relaxed tracking-wide text-[#0061fe]  outline-none hover:cursor-default   h-[350px] overflow-clip"
+                                    className="paragraph mx-auto flex h-[350px] w-full flex-wrap overflow-clip px-8 pt-16 pb-8 text-4xl leading-relaxed tracking-wide text-letter-unchecked outline-none hover:cursor-default"
                                     tabIndex={0}
                                     onKeyDown={handleInput}
                                 >
                                     {renderParagraph}
                                 </div>
+
                                 <BlinkingCursor
                                     wordIndex={currentWordIndex}
                                     letterIndex={currentLetterIndex}
