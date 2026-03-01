@@ -110,7 +110,7 @@ const Lobby: React.FC<LobbyProps> = ({ createGame, joinGame }) => {
 
         {/* Title */}
         <h2 className="mb-8 text-center text-3xl font-black tracking-tight bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
-          EXTRU Type Master 2026
+          EXTRU TypeMaster 2026
         </h2>
 
         {/* Cards */}
