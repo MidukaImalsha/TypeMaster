@@ -182,7 +182,7 @@ const Leaderboard: React.FC = () => {
 
           {/* QR Code */}
           <div className="glass-card p-5 flex flex-col items-center text-center">
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-300/60">Visit Us</h2>
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-300/60">Vote Us</h2>
             <div className="overflow-hidden rounded-xl border border-blue-700/30">
               <img src={qr} alt="QR Code" className="w-full" />
             </div>
